@@ -8,6 +8,10 @@
 
 }
 
+.deadline-form{
+    color: white;
+}
+
 header{
     background: linear-gradient(
             90deg,
@@ -122,10 +126,25 @@ img{
     padding: 16px 22px;
 }
 
+.deadline-button{
+    padding: 10px;
+    border: none;
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(
+            90deg,
+            rgba(237, 138, 138, 1) 0%,
+            rgba(37, 196, 90, 1) 100%
+    );
+    color: #fff;
+    text-transform: capitalize;
+}
+
 .delete-button{
     padding: 10px;
     border: none;
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px 4px 4px 4px;
     cursor: pointer;
     outline: none;
     background: linear-gradient(
@@ -140,7 +159,7 @@ img{
 .edit-button{
     padding: 10px;
     border: none;
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px 4px 4px 4px;
     cursor: pointer;
     outline: none;
     background: linear-gradient(

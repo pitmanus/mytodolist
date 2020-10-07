@@ -4,13 +4,45 @@ import DatePicker from 'react-datepicker/dist/react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import checksign from './../../src/checkmark-xxl.png';
 
-function Todo({todos, completeTodo, removeTodo, updateTodo, deadline}){
+
+function Todo({todos, completeTodo, removeTodo, updateTodo, addDate}){
     const [edit, setEdit] = useState({
             id:null,
             value: ''
         });
 
-    const[selectedDate, setSelectedDate]=useState(null);
+    const [selectedDate, setSelectedDate] = useState(null)
+
+    const [openDatePicker, setOpenDatePicker] = useState(false);
+
+    const [item, setItem] = useState({
+        id:null,
+        value: null
+    })
+
+    const submiteDate = () => {
+    addDate(item.id, item.value, selectedDate)
+        console.log(selectedDate, item.id)
+        setOpenDatePicker(false)
+        setItem({id: null, value: null})
+        setSelectedDate(null)
+
+    }
+
+    if (openDatePicker){
+        return <>
+            <div className='deadline-form'>
+                <p>Pick a date</p>
+        <DatePicker
+            selected = {selectedDate}
+            onChange = {date=>setSelectedDate(date)}
+            dateFormat='dd/MM/yyyy'
+            minDate={new Date()}
+        />
+        </div>
+        <button onClick={submiteDate}>Confirm</button>
+        </>
+    }
 
 
     const submitUpdate = value =>{
@@ -30,19 +62,20 @@ function Todo({todos, completeTodo, removeTodo, updateTodo, deadline}){
         'todo-row'} key={index}
         >
          <div  key={todo.id} onClick={()=>completeTodo(todo.id)}>
-             {todo.text}
+              {todo.text} {'Deadline: '} {todo.date.toLocaleDateString()}
+
          </div>
             <div className='img'>{todo.isComplete? <img src={checksign} alt='img' width='50px' height='50px'/> : ''}</div>
             <div className='finish-date'> {todo.isComplete? 'Done on : ' + new Date().toLocaleString() : ''}</div>
 
-            <form className='deadline-form'
-            ><div>Set deadline</div><DatePicker
-                selected={selectedDate}
-                onChange={date=>setSelectedDate(date)}
-                dateFormat = 'dd/MM/yyyy'
-                minDate = {new Date()}
-            /></form>
+
              <span>
+
+                 <button
+                     className="deadline-button"
+                     onClick={()=> {setOpenDatePicker(true); setItem({id:todo.id, value: todo.text})} }
+                 >Set deadline</button>
+
              <button
                  className="delete-button"
                  onClick={()=>removeTodo(todo.id)}

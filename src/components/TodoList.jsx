@@ -26,6 +26,14 @@ function TodoList(){
         setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)));
     }
 
+    const addDate = (todoId, todoText, date)=>{
+        let newItem = ({
+            id: todoId,
+            text: todoText,
+            date: new Date(date)
+        })
+        setTodos(prev => prev.map(item => (item.id === todoId ? newItem : item)));
+    }
 
     const removeTodo = id => {
         const removeArr = [...todos].filter(todo=>todo.id !== id)
@@ -43,6 +51,8 @@ function TodoList(){
         setTodos(updatedTodos);
     }
 
+
+
 return (
     <div>
 <h1>Add new task</h1>
@@ -52,6 +62,7 @@ return (
         completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo = {updateTodo}
+        addDate = {addDate}
         />
     </div>
 )
