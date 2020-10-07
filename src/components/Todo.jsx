@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import checksign from './../../src/checkmark-xxl.png';
 
 
-function Todo({todos, completeTodo, removeTodo, updateTodo, addDate}){
+function Todo({todos, completeTodo, removeTodo, updateTodo, addDate, doneDate}){
     const [edit, setEdit] = useState({
             id:null,
             value: ''
@@ -26,7 +26,6 @@ function Todo({todos, completeTodo, removeTodo, updateTodo, addDate}){
         setOpenDatePicker(false)
         setItem({id: null, value: null})
         setSelectedDate(null)
-
     }
 
     if (openDatePicker){
@@ -37,7 +36,7 @@ function Todo({todos, completeTodo, removeTodo, updateTodo, addDate}){
             selected = {selectedDate}
             onChange = {date=>setSelectedDate(date)}
             dateFormat='dd/MM/yyyy'
-            minDate={new Date()}
+            /*minDate={new Date()}*/
         />
         </div>
         <button onClick={submiteDate}>Confirm</button>
@@ -61,12 +60,12 @@ function Todo({todos, completeTodo, removeTodo, updateTodo, addDate}){
         <div className={todo.isComplete ? 'todo-row complete' :
         'todo-row'} key={index}
         >
-         <div  key={todo.id} onClick={()=>completeTodo(todo.id)}>
-              {todo.text} {'Deadline: '} {todo.date.toLocaleDateString()}
+         <div  key={todo.id} onClick={()=>{completeTodo(todo.id); doneDate(todo.id)}}>
+             {todo.text} <div className={todo.date.getTime()<new Date().getTime()? 'after-deadline': 'before-deadline'}>{todo.date.getTime()!==new Date(null).getTime()? 'Deadline: ' + todo.date.toLocaleDateString() : '' }</div>
 
          </div>
             <div className='img'>{todo.isComplete? <img src={checksign} alt='img' width='50px' height='50px'/> : ''}</div>
-            <div className='finish-date'> {todo.isComplete? 'Done on : ' + new Date().toLocaleString() : ''}</div>
+            <div className='finish-date'> {todo.isComplete? 'Done on : ' + todo.doneDate : ''}</div>
 
 
              <span>

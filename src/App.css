@@ -12,6 +12,10 @@
     color: white;
 }
 
+.after-deadline{
+    color: red;
+}
+
 header{
     background: linear-gradient(
             90deg,
