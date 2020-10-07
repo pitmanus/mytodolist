@@ -4,15 +4,14 @@ import TodoList from "./components/TodoList";
 
 function App() {
   return <>
+    <header>{'TODO APP'}</header>
+
     <div className="todoapp">
-     <header></header>
+      <TodoList/>
     </div>
 
-      <TodoList/>
-
-    {/* <div className="footer">
-      <p></p>
-    </div>*/}
+<footer id='footer'>
+</footer>
       </>
 }
 

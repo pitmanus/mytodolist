@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import TodoForm from "./TodoForm";
 import DatePicker from 'react-datepicker/dist/react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import checksign from './../../src/checkmark-xxl.png';
 
 function Todo({todos, completeTodo, removeTodo, updateTodo, deadline}){
     const [edit, setEdit] = useState({
@@ -31,7 +32,7 @@ function Todo({todos, completeTodo, removeTodo, updateTodo, deadline}){
          <div  key={todo.id} onClick={()=>completeTodo(todo.id)}>
              {todo.text}
          </div>
-            <div className='img'>{todo.isComplete? <img src='https://www.iconsdb.com/icons/preview/green/checkmark-xxl.png' alt='img' width='50px' height='50px'/> : ''}</div>
+            <div className='img'>{todo.isComplete? <img src={checksign} alt='img' width='50px' height='50px'/> : ''}</div>
             <div className='finish-date'> {todo.isComplete? 'Done on : ' + new Date().toLocaleString() : ''}</div>
 
             <form className='deadline-form'
